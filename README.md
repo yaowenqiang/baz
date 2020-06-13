@@ -136,3 +136,41 @@ Arrays are multivaluted variables and can be indexed (zero-based) or associative
 > declare -a user_name([0]=fred [1]=jack)
 > declare -p user_name -- display the attributes and value of each NAME
 
+## Redirection
+
+Output fro mcommands are usually divided into STDOUT and STDERR .We can redirect each of these channels individually or both to the same file as in the example
+
+> ls /etc/hosts > output.txt
+> /etc/hosts (STDOUT)
+
+> ls /etc/host  2> output.txt
+> ls: cannot access '/etc/host': No such file or directory
+> (STDERR)
+
+> ls /etc/host  /etc/host &> output.txt
+
+### Redirection Blocks and Subshells
+
+
+Commands can be blocked together with single parenthesis.The combined output from the command block can be redirected as required. Equally, redirecting the output of BASH itself  will redirect everything from the shell
+
+
+(ls /etc/hosts; ls /etc/hot) > file1
+
+> bash > output
+
+
+### Controlling Redirection Using Exec
+
+Perhaps, more flexible is the exec command that can be used to create new file descriptors that connect to the builtin file descriptors. We use new file descriptors as they are easier to reset than the standard descriptors when redirection is no longer required.
+
+> LOG=log.file
+> exec 4>&1
+> exec > "$LOG"
+> ls
+> exec 1>&4 4>&~
+> ls /proc/$$/fd  -- $$ means current process id
+> LOG=log.file
+> exec 4>&1
+> ls /proc/$$/fd  -- $$ means current process id
+
