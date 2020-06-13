@@ -114,4 +114,25 @@ the advanced arithmetic parenthesis can run calculations that may make condition
 > daily_rate=3; rate=2
 > (( rate < daily_rate )) && echo OK
 
+## Arrays
+
+
+Arrays are multivaluted variables and can be indexed (zero-based) or associative arrays. Associative arrays are not available in earlier versions of BASH
+
+
+> declare -a user_name
+
+> user_name[0]=bob;
+> user_name[1]=smith;
+> echo ${user_name[0]}
+
+> unset user_name;
+> declare -A user_name
+
+> declare -A user_name  -- define a associative array
+> user_name=([first]=bob [last]=smith)
+> echo ${user_name[first]}
+
+> declare -a user_name([0]=fred [1]=jack)
+> declare -p user_name -- display the attributes and value of each NAME
 
