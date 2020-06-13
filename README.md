@@ -81,4 +81,37 @@ If it is necessary, noe of the option allows for file name globbing or wildcards
 
 > set -o | grep glob
 
+## Arithmetic Evaluation
+
+
+The shell allows for simple, integer, arithmetic calculations using different commands or features
+
+
+### Let 
+
+The builtin command line can be used to populate variables with te result
+
+> type let
+> let a=3*5
+> echo $a
+
+### Using Expr
+
+the Command expr can display the result directly at the shell, or using command substitution. populate a variable, Ensure that spaces are used between the values and operator
+
+> expr 3 * 5
+> if got f ,run set -f
+> b = $(expr 3 * 5)
+
+
+### Using Double Parenthesis
+
+the advanced arithmetic parenthesis can run calculations that may make condition evaluations easier. In the example, we check that the current rate is below the daily rate
+
+> echo $(( 3 * *5 ))
+
+
+> daily_rate=3; rate=2
+> (( rate < daily_rate )) && echo OK
+
 
