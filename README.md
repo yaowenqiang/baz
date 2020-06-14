@@ -174,3 +174,14 @@ Perhaps, more flexible is the exec command that can be used to create new file d
 > exec 4>&1
 > ls /proc/$$/fd  -- $$ means current process id
 
+## Creating Heredocs
+
+### HEREDOC
+
+STDIN can be redirected from a file rather than the keyboard. Often this can be useful within scripts to create files from the scripts. The keyword END, in this case, can be any string that will not appear in the body text.
+
+> cat > myfile <<END
+> This is line 1
+> this is line 2
+> END
+
