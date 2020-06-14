@@ -185,3 +185,30 @@ STDIN can be redirected from a file rather than the keyboard. Often this can be 
 > this is line 2
 > END
 
+
+## Console Printing
+
+
+The commands echo and printf can be used to print to the console.When doing so always quote variables to protect spaces and other special characters that may be misinterpreted.
+
+Each command has a builtin and external version portability is increased using external commands at the cost of speed.
+
+### Quote Variables
+
+Quoting variables prevents possible spaces in the variables causing havoc in your data.
+
+> username="jo smith"
+> printf "The user is %s\n" $username
+> The user is Jo
+> The user is smith
+
+> printf "The user is %s\n" "$username"
+> The user is Jo smith
+
+> type -a echo printf
+
+### Builtin / External
+
+Commands builtin to the shell use less resource and run more quickly. using the external commands aids portability as we are not dependent on the shell
+
+
