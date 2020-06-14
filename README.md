@@ -211,4 +211,11 @@ Quoting variables prevents possible spaces in the variables causing havoc in you
 
 Commands builtin to the shell use less resource and run more quickly. using the external commands aids portability as we are not dependent on the shell
 
+## Process Substitution
+
+Output from command groups can be redirected in the from of process substitution.Here we compare the sorted output or unique entries from two files . The option -3 excludes printing of the common lines in both files.
+
+> comm -3 <(sort list1 | uniq) <(sort list2 | uniq)
+
+
 
