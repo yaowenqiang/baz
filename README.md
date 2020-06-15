@@ -217,5 +217,33 @@ Output from command groups can be redirected in the from of process substitution
 
 > comm -3 <(sort list1 | uniq) <(sort list2 | uniq)
 
+# Debuggin scripts with bash -x
+
+## Why the Shebang
+
+
+If the default shell is bash and the script is written in bash then we don't have a problem!
+
+Whilst the statement is true having the shebang not only allows us to debug the script, but it identifies the file type.
+
+
+> cat > my.sh <<END
+echo "This is a script"
+END
+> file my.sh
+
+> sed -i '1 i/#!/bin/bash' my.sh; file my.sh -- and a new line via sed
+
+## Debugging Shells
+
+
+Adding the xtrace option to the current interactive shell allows you to see how variables are expanded as well as aliases.
+
+> set -x ( or set -o xtrace)
+
+
+> set -x
+> ls $HOME
+> + ls --color=auto /home/vagrant
 
 
