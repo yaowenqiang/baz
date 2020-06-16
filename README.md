@@ -246,4 +246,36 @@ Adding the xtrace option to the current interactive shell allows you to see how 
 > ls $HOME
 > + ls --color=auto /home/vagrant
 
+### debug scripts
+
+> bash -x my.sh
+
+### debug shells
+
+> set +x
+
+
+## Using Type and Which 
+
+Which vs Type
+
+
+The type commands searches aliases, functions, builtin, and external commands in the PATH statement.
+
+the which command only searches the PATH statement
+
+> type -a pwd
+
+> which -a pwd
+> unalias aliasname
+
+> ln -s /usr/share/doc .
+> cd doc
+> pwd
+> /home/vagrant/baz/doc
+> /usr/bin/pwd
+> /usr/share/doc
+> /usr/bin/pwd
+> /usr/share/doc
+> 
 
