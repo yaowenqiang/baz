@@ -279,3 +279,17 @@ the which command only searches the PATH statement
 > /usr/share/doc
 > 
 
+# Processing Command Line Options
+
+## Script Variables
+
+When passing arguments to scripts they populate variables. $0 represents the scriptsd itself. $# is the number of arguments. the complete arguments listed can be shown with $^ as single string for or stored in an array $@
+
+
+## Working with Shift
+
+### Shift
+
+The builtin shift command is used to mvoe arguments along. Having processed $! we can move $2 to become $1 using the shift command. This is most useful in a loop allowing us to work only with $1 where the arguments list can be or any size
+
+
