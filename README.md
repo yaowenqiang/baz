@@ -453,3 +453,52 @@ CTRL + d
 
 > cat /etc/anacrontab
 
+# Understanding The Script and Service
+
+## Service Units
+
+
+Systemd service units descibe the execution of services. To define your own we define units in /etc/systemd/system.
+
+## Describe the Service
+
+
+Creating a pipe file we can have a client send data to the pipe. TERM1, and the  server, TERM2, process the data. Unlike  a standard pipe this allows for IPC or inter-process communication
+
+> sudo mkfifo /var/log/pipe; sudo chmod  -v 666 /var/log/pipe
+> TERM1 $ echo hello > /var/log/pipe
+> TERM2 $ cat < /var/log/pipe>
+
+
+#!/bin/bash
+declare -l line
+untile [[ $line == 'stop' ]]
+do
+  line=$(cat /var/log/pipe)
+  echo $line >> /var/log/pipe.out
+done
+
+
+
+### The Service Unit
+
+
+[Unit]
+Description=pipe processing service
+After=sshd.service
+
+[Service]
+Type=simple
+ExecStart=/root/bin/pipe.sh
+ExecStop=/bin/kill $MAINPID
+KillMode=process
+
+[Install]
+WantedBymulti-user.target
+
+> sudo systemctl daemon-reload
+> sudo systemctl enable  --now mypipe.service
+> sudo systemctl status  --now mypipe.service
+
+
+

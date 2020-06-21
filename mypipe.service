@@ -1,0 +1,12 @@
+[Unit]
+Description=pipe processing service
+After=sshd.service
+
+[Service]
+Type=simple
+ExecStart=/home/vagrant/baz/pipe.sh
+ExecStop=/bin/kill $MAINPID
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
