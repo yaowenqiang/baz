@@ -332,3 +332,74 @@ It can be necessary to separate option arguments from script arguments. If we wa
 > getopts.h -d -- fred
 > getopts.sh
 
+# Working with Strings
+
+
+## Input Using Read
+
+Teh read command can be used in scripts or from the command line to populate a variable. If the variable is not named the REPLY variable is used.
+
+> read
+> populate $REPLY
+> read myvar
+> populate $myvar
+
+> read -s
+> populate $REPLY but does not echo to the screen
+
+> read -n1
+> populate $REPLY but only accepts 1 character
+
+
+## The String Length
+
+Caculating the length of a string is possible when stored in a variable.Perhaps we require a minimum length of 8 characters for a username.We can test the length of the variable to see if it meets the requirements Using the -p option allows a prompt for the read input.
+
+> read -p "Enter a user name: " username
+
+> echo ${#username} - string length
+
+> 
+> read
+> echo $REPLY
+
+> read -p "type in a username: "
+> 
+
+> read -p "type in a username: " username
+> echo $username
+
+> read -n1 -p "Continue y or n:"
+> read -n1 -p "Continue y or n:" -s  #--slient
+
+> read -p "Enter a username or 8 or more characters " username
+> echo ${#username}
+
+### Provindg Default Values
+
+
+Using the :- syntax the default value is displayed when the username value is null or the variable is unset.
+
+Using the - syntax the default value is only displayed when the variable is unset and not when the value is null.
+
+> read username
+> echo ${username: -misconfigured}
+> echo ${password: -nopassword}
+
+> unset username
+
+> declare -p username
+
+### String Replacement
+
+
+We can replace strings easily and directly from the she.shell. Here we look at the 0 in the IP address. A single / after the subject replaces only the first instance. using // replaces all instances
+
+
+> echo $SSH_CLIENT
+> echo ${SSH_CLIENT/0/9} -- replace one 
+> echo ${SSH_CLIENT//0/9} -- replace all
+
+
+> !u 
+
