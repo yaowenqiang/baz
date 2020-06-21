@@ -403,3 +403,53 @@ We can replace strings easily and directly from the she.shell. Here we look at t
 
 > !u 
 
+# Running Completed Scripts
+
+## LOng Running Scripts
+
+If a script iwll take a long time to execute we need to be able to both background the script and allow it to continue executinon even after user logout
+
+
+### Background and nohup
+
+> sleep 5
+
+> ps -f $$
+
+> sleep 5000 &
+> sleep 5000&
+> ps -fp  pid
+
+> nohup sleep 10000&
+
+## Scheduling Using At
+
+### Scheduling Scripts
+
+Script can be scheduled to run at a future time with crond or atd. On modern systems crond is used also for scheduling with anacron. Using at the command is scheduled just once whereas using cron the schedule is created for repeat executions
+
+> at none
+> /home/pi/my.sh
+
+> atq --list jobs
+> atrm  job_number --remote jobs
+> at -c 1
+CTRL + d
+
+> at 13:32 23 March 
+
+
+> crontab -e
+> 0 12 * * * /home/pi/my.sh
+
+
+> crontab -e
+> EDITOR=vim crontab -e
+> EDITOR=vim !!
+> 30 11 * * 1  echo hello > /tmp/hello
+
+> crontab -l
+> sudo sed -Ei '/^($|#)/d' /var/spool/cron/crontabs/vagrant
+
+> cat /etc/anacrontab
+
