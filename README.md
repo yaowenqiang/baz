@@ -292,4 +292,43 @@ When passing arguments to scripts they populate variables. $0 represents the scr
 
 The builtin shift command is used to mvoe arguments along. Having processed $! we can move $2 to become $1 using the shift command. This is most useful in a loop allowing us to work only with $1 where the arguments list can be or any size
 
+# Understanding Options
+
+## getopts
+
+The builtin command getopts allows for options to be passed to your script. We can create a script to create or delete users. the correct action coming fro te options -c to create and -d to delete.
+
+## Using getopts
+
+
+while getopts ':c:d:' opt
+do
+  case "$opt" in
+    c) sudo useradd -m "$OPTARG"
+      break;;
+    d) sudo userdel -r "$OPTARG"
+      break;;
+    *) echo "Usage: $0 [-c|-d] <user> ";;
+  esac
+done  
+      
+
+> getopts cd -cd
+> getopts c:d -c fred -d
+> getopts c:d -c fred -d joe
+> getopts :cd -h
+
+Require OPtion Arguments
+
+The colon following an option required an argument to be supplied to the option
+
+A colon prepending the list of options allows the default error handling to be overwritten. Custom error handling is managed by the case else action.
+
+End of options
+
+It can be necessary to separate option arguments from script arguments. If we wanted the user to be processed as $1 and drop the requirement for the option argument we could make use of the -- in the script execution.
+
+> getopts.h -c -- fred
+> getopts.h -d -- fred
+> getopts.sh
 
